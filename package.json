@@ -1,0 +1,12 @@
+{
+  "name": "finance-app",
+  "version": "1.0.0",
+  "description": "## Overview",
+  "main": "main.go",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch . --exec go run main.go --signal SIGTERM"
+  },
+  "author": "",
+  "license": "ISC"
+}

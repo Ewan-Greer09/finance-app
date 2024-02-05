@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+
+    <!-- Local install of HTMX -->
+    <script src="./htmx/htmx.min.js"></script>
+    <!-- CDN/Link for material icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <!-- links to custom css -->
+    <link rel="stylesheet" href="css/index.css" />
+    <!-- links to custom javascript -->
+    <!-- go-echarts -->
+    <script src="https://go-echarts.github.io/go-echarts-assets/assets/echarts.min.js"></script>
+
+    <!-- ! All CSS and JS must be included on this page for all components -->
+  </head>
+
+  <body id="body">
+    <div class="left" id="side-nav">
+      <nav>
+        <a href="#"
+          ><span class="material-symbols-outlined"> home </span>Home</a
+        >
+        <a href="#"
+          ><span class="material-symbols-outlined"> settings </span>Settings</a
+        >
+        <a href="#"
+          ><span class="material-symbols-outlined"> send </span>Contact</a
+        >
+        <a href="/admin.html"
+          ><span class="material-symbols-outlined"> admin_panel_settings </span
+          >admin</a
+        >
+        <a href="/login.html"
+          ><span class="material-symbols-outlined"> login </span>login</a
+        >
+        <a hx-get="/api/v1/admin/logout"
+          ><span class="material-symbols-outlined"> logout </span>logout</a
+        >
+      </nav>
+    </div>
+    <main>
+      <section id="top">
+        <div>
+          <h1 style="text-align: center">Add Expense</h1>
+          <!-- form to add an expense -->
+          <form
+            id="add-expense"
+            hx-post="/api/v1/expense"
+            hx-target="#middle-left"
+          >
+            <input
+              type="text"
+              name="expense"
+              id="expense"
+              placeholder="Expense"
+              required
+            />
+            <input
+              type="number"
+              step="0.01"
+              name="amount"
+              id="amount"
+              placeholder="Amount"
+              required
+            />
+            <input type="submit" value="Add" />
+          </form>
+        </div>
+
+        <div>
+          <h1 style="text-align: center">Add Income</h1>
+          <!-- form to add an income -->
+          <form
+            id="add-income"
+            hx-post="/api/v1/income"
+            hx-target="#middle-right"
+          >
+            <input
+              type="text"
+              name="income"
+              id="income"
+              placeholder="Income"
+              required
+            />
+            <input
+              type="number"
+              step="0.01"
+              name="amount"
+              id="amount"
+              placeholder="Amount"
+              required
+            />
+            <input type="submit" value="Add" />
+          </form>
+        </div>
+      </section>
+      <section
+        id="middle-left"
+        hx-get="/api/v1/expense"
+        hx-swap="innerHTML"
+        hx-trigger="load"
+      >
+        <!-- Populated with a list of expenses -->
+      </section>
+      <section
+        id="middle-right"
+        hx-get="/api/v1/income"
+        hx-swap="innerHTML"
+        hx-trigger="load"
+      >
+        <!-- populated with a list of imcomes -->
+      </section>
+      <section
+        id="bottom"
+        hx-get="/api/v1/graph"
+        hx-swap="innerHTML"
+        hx-target="#bottom"
+        hx-trigger="load"
+      >
+        <!-- Expenses vs Incomes as a graph -->
+      </section>
+    </main>
+  </body>
+</html>

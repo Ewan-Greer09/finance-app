@@ -1,0 +1,10 @@
+{
+  "api": {
+    "service_name": "finances",
+    "addr": "0.0.0.0:8181",
+    "log_file": "./api.log",
+    "log_level": -4,
+    "timeout": 10,
+    "database_name": "finances"
+  }
+}

@@ -1,0 +1,84 @@
+<div style="background-color: #333">
+  <style>
+    .IncomeCard {
+      outline: black solid 1px;
+      padding: 5px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      text-align: center;
+      background-color: #5a5959;
+      color: black;
+      position: relative; /* Add position relative to enable absolute positioning for child elements */
+      /* drop shadow to make each card stand out some */
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .Card-Header {
+      background-color: #5a5959;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .Card-Header h3 {
+      background-color: #5a5959;
+      margin: 0;
+    }
+
+    .Card-Body {
+      background-color: #5a5959;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%; /* Ensure the Card-Body takes the full height */
+    }
+
+    .Card-Body .Amount {
+      margin-bottom: 10px; /* Adjust margin as needed */
+    }
+
+    .Card-Body .material-symbols-outlined {
+      color: red;
+      cursor: pointer;
+      position: absolute;
+      bottom: 5px; /* Adjust the bottom value to position it in the bottom */
+      right: 5px; /* Adjust the right value to position it on the right */
+    }
+
+    #delete-symbol {
+      float: right; /* Remove this line */
+    }
+  </style>
+  <button
+    type="button"
+    hx-get="api/v1/income"
+    hx-target="#middle-right"
+    hx-swap="innerHTML"
+  >
+    <span class="material-symbols-outlined">refresh</span>
+  </button>
+  <h3>Income</h3>
+  {{ range . }}
+  <div class="IncomeCard">
+    <div class="Card-Header">
+      <h3>{{ .Source }}</h3>
+    </div>
+    <div class="Card-Body">
+      ${{ .Amount }}
+      <span
+        class="material-symbols-outlined"
+        id="delete-symbol"
+        hx-delete="/api/v1/income/{{ .ID }}"
+        hx-target="#middle-right"
+        hx-swap="innerHTML"
+      >
+        delete
+      </span>
+    </div>
+  </div>
+
+  {{ else }}
+  <tr>
+    <td colspan="2" style="text-align: center">No Income</td>
+  </tr>
+  {{ end }}
+</div>

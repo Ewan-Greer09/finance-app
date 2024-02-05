@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <script src="./htmx/htmx.min.js"></script>
+  </head>
+  <body>
+    <div id="login-container">
+      <h2>Login</h2>
+      <form
+        id="login-form"
+        hx-post="/api/v1/admin/login"
+        hx-target="#login-message"
+      >
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="username"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="password"
+          required
+        />
+        <input type="submit" value="login" />
+      </form>
+
+      <div style="height: 100px"><p id="login-message"></p></div>
+
+      <nav>
+        <a hx-replace-url="/index" hx-get="/index.html" hx-target="#body"
+          ><span class="material-symbols-outlined"> home </span>Home</a
+        >
+        <a hx-replace-url="/settings" hx-get="/settings.html" hx-target="#body"
+          ><span class="material-symbols-outlined"> settings </span>Settings</a
+        >
+        <a hx-replace-url="/contact" hx-get="/contact.html" hx-target="#body"
+          ><span class="material-symbols-outlined"> send </span>Contact</a
+        >
+        <a hx-replace-url="/login" hx-get="/login.html" hx-target="#body"
+          ><span class="material-symbols-outlined"> login </span>login</a
+        >
+        <a hx-get="/api/v1/admin/logout"
+          ><span class="material-symbols-outlined"> logout </span>logout</a
+        >
+      </nav>
+    </div>
+  </body>
+</html>

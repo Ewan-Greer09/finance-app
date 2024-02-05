@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <!-- Local install of HTMX -->
+    <script
+      src="https://unpkg.com/htmx.org@1.9.10"
+      integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="left" id="side-nav">
+      <nav>
+        <a href="/index.html"
+          ><span class="material-symbols-outlined"> home </span>Home</a
+        >
+        <a hx-push-url="true" hx-get="/settings.html" hx-target="#body"
+          ><span class="material-symbols-outlined"> settings </span>Settings</a
+        >
+        <a hx-push-url="true" hx-get="/contact.html" hx-target="#body"
+          ><span class="material-symbols-outlined"> send </span>Contact</a
+        >
+        <a hx-push-url="true" hx-get="/admin.html" hx-target="#body"
+          ><span class="material-symbols-outlined"> admin_panel_settings </span
+          >admin</a
+        >
+        <a hx-push-url="true" hx-get="/login.html" hx-target="#body"
+          ><span class="material-symbols-outlined"> login </span>login</a
+        >
+        <a hx-get="/api/v1/admin/logout"
+          ><span class="material-symbols-outlined"> logout </span>logout</a
+        >
+      </nav>
+    </div>
+    <main>
+      <!-- grid layout -->
+      <section>
+        <!-- HTMX form to get a user -->
+        <form
+          id="get-user"
+          hx-get="/api/v1/admin/user"
+          hx-target="#output"
+          hx-swap="afterend"
+        >
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="username"
+            required
+          />
+          <input type="submit" value="Add" />
+        </form>
+
+        <div id="output">
+          <!-- list of users -->
+        </div>
+      </section>
+      <section>
+        <form
+          id="create-user"
+          hx-post="/api/v1/admin/user"
+          hx-target="#created-user"
+          hx-swap="afterend"
+        >
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="username"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
+            required
+          />
+          <input
+            type="checkbox"
+            name="isAdmin"
+            id="isAdmin"
+            placeholder="is admin"
+            required
+          />
+          <input type="submit" value="Add" />
+        </form>
+
+        <div id="created-user">
+          <!-- list of users -->
+        </div>
+      </section>
+      <section></section>
+      <section></section>
+    </main>
+  </body>
+</html>
